@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"> {% load staticfiles %}
+    <title>Login Page</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/materialize.css' %}">
+</head>
+
+<body>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/materialize.js' %}"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('select').material_select();
+        });
+    </script>
+
+    <div class="row">
+        <div class="col s1"></div>
+        <div class="col s4">
+            <h3>Registration</h3>
+            <form method="POST" action="/main/register/">
+                {% csrf_token %}
+                <p>Name:</p>
+                <input type="text" name="name" placeholder="Enter name here" required=true>
+
+                <p>Alias:</p>
+                <input type="text" name="alias" placeholder="Enter alias here" required=true>
+
+                <p>Email:</p>
+                <input type="text" name="email" placeholder="Enter email here" required=true>
+
+                <p>Password:</p>
+                <input type="password" name="password" placeholder="Enter password here" required=true>
+                <p style="font-size : 12px">*Password should be atleast 8 charachers</p>
+                <p>Confirm Password: </p>
+                <input type="password" name="c_password" placeholder="Confirm password here" required=true>
+
+                <p>Date of Birth: </p>
+                <input type="date" name="date" placeholder="Enter the date of birth" required=true>
+
+                <p><input class="waves-effect waves-light btn" type="submit" value="Register" required=true></p>
+            </form>
+        </div>
+        {%if messages%} {%for message in messages%} {% if message.tags == "error" %}
+        <p style="color: red">{{message}}</p>
+        {% endif %} {%endfor%} {%endif%} {%if messages%} {%for message in messages%} {% if message.tags == "success" %}
+        <p style="color: green">{{message}}</p>
+        {% endif %} {%endfor%} {%endif%}
+
+        <div class="col s2"></div>
+
+        <div class="col s4">
+            <h3>Login</h3>
+            <form method="post" action="/main/login/">
+                {% csrf_token %} 
+                <p>Email:</p>
+                <input type="text" name="email" placeholder="Enter email here" required=true> 
+                <p>Password:</p>
+                <input type="password" name="password" placeholder="Enter password here" required=true>
+
+                <p><input class="waves-effect waves-light btn" type="submit" value="Login"></p>
+
+        </div>
+        </form>
+</body>
+
+</html>

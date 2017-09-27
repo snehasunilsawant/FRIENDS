@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Friends</title>
+</head>
+<body>
+      
+    <h2>Hello, {{request.session.name}} !</h2> <p><a href="/main/logout">Logout</a></p>
+    {% if count == 1 %}
+    <p>You are the first user. Please wait for other user to get registred</p>
+    {% else %}
+    <h3>Here is the list of your friends : </h3>
+    
+    <table>      
+       
+            <tr>
+                <th>Alias</th>
+                <th>Action</th>
+            </tr>  
+            {%if user.friends_with.all%}          
+            {% for i in user.friends_with.all %}
+            <tr>
+                <td>{{i.alias}}</a></td>
+                <td><a href="/friends/user/{{i.id}}/">View profile</a>    <a href="/friends/remove/{{i.id}}/">Remove as Friend</a></td>
+            </tr>
+            {%endfor%}
+            {%else%}
+            <p>You don't have friends yet</p>
+            {%endif%}
+        </table>
+    
+    
+    <div class="row">
+            <h3>Other users not on your friend list : </h3>
+            <table>
+            <tr>
+                <th>Alias</th>
+                <th>Action</th>
+            </tr>
+            {%if otherUsers %}   
+            {% for i in otherUsers %}
+            <tr>
+                <td><a href="/friends/user/{{i.id}}/">{{i.alias}}</a></td>
+                <td> <form method="POST" action="/friends/add/{{i.id}}/">
+                    {% csrf_token %}
+                    <input type="submit" value="Add as Friend">
+                </form>
+            </td>
+            </tr>
+            {%endfor%}
+            {%else%}
+            <p>All users are your friends. </p>
+            {%endif%}
+            </table>
+           
+        </div>
+        {%endif%}
+</body>
+</html>

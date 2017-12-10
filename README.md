@@ -1,5 +1,5 @@
 # FRIENDS
-Django Based social networking website
+Django Based social networking website. 
 
 **Scope**: 
 Implemented multi-page website from scratch (using RESTful routing/Web APIs, MVC, user authentication (login/registration), front and backend validations, backend DB with basic CRUD) Focus was to integrate multiple APIs into project and move the item through front end to back end.
@@ -11,6 +11,8 @@ Database : MySQL and ORM
 Languages : python
 CSS Framework : materialiseCSS
 ```
+*It's a small project focusing on Django, database design and accessing session within website. Implemented within 2-3 hours.*
+
 ## Features :
 1. User should able to register and login to website sucessfully. For incorrect inpute proper user friendly messages/pop-up should get displayed
 
